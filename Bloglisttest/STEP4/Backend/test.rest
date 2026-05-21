@@ -1,0 +1,87 @@
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My First Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My Second Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My Third Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+}
+
+
+
+
+###
+
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My Fourth Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+},
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My Fifth Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+},
+
+###
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My Sixth Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+}
+
+###
+
+POST http://localhost:3003/api/blogs
+Content-Type: application/json
+
+{
+  "title": "My Seventh Blog",
+  "author": "John mal",
+  "url": "https://reactpatterns.com/",
+  "likes": 0
+}
+
+###
+
+GET http://localhost:3003/api/blogs
