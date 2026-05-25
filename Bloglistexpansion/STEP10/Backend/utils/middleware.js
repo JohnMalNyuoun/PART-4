@@ -5,7 +5,11 @@ const User = require('../models/user')
 const requestLogger = (request, response, next) => {
   logger.info('Method:', request.method)
   logger.info('Path:  ', request.path)
-  logger.info('Body:  ', request.body)
+  const safeBody = { ...request.body }
+  if (safeBody.password) {
+    safeBody.password = '[REDACTED]'
+  }
+  logger.info('Body:  ', safeBody)
   logger.info('---')
   next()
 }
@@ -21,6 +25,8 @@ const errorHandler = (error, request, response, next) => {
     return response.status(400).send({ error: 'malformatted id' })
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError' || error.name === 'TokenExpiredError') {
+    return response.status(401).json({ error: 'token missing or invalid' })
   }
 
   next(error)
@@ -38,10 +44,15 @@ const tokenExtractor = (request, response, next) => {
 }
 
 const userExtractor = async (request, response, next) => {
-  if (request.token) {
+  if (!request.token) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
-  const decodedToken = jwt.verify(request.token, process.env.SECRET)
+  let decodedToken
+  try {
+    decodedToken = jwt.verify(request.token, process.env.SECRET)
+  } catch (error) {
+    return response.status(401).json({ error: 'token missing or invalid' })
+  }
 
   if (!decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
