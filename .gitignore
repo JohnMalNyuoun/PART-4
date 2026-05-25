@@ -1,4 +1,5 @@
 # Node modules
+# Note: node_modules/ and .env files were previously committed; removing them from history requires manual history rewrite by the repository owner.
 node_modules/
 
 # Logs
