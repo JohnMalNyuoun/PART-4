@@ -23,19 +23,12 @@ loginRouter.post('/', async (request, response) => {
   }
 
   // Sign the token using your SECRET environment variable
-  const token = jwt.sign(userForToken, process.env.SECRET)
+  const token = jwt.sign(userForToken, process.env.SECRET, { expiresIn: '1h' })
 
   response
     .status(200)
     .send({ token, username: user.username, name: user.name })
 })
 
-const getTokenFrom = request => {
-  const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
-  }
-  return null
-}
 
 module.exports = loginRouter
