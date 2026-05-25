@@ -2,6 +2,21 @@ const supertest = require('supertest')
 const app = require('../app')
 const api = supertest(app)
 const User = require('../models/user')
+const { connectTestDb, closeTestDb } = require('./test_setup')
+
+jest.setTimeout(120000)
+
+beforeAll(async () => {
+  await connectTestDb()
+})
+
+afterAll(async () => {
+  await closeTestDb()
+})
+
+beforeEach(async () => {
+  await User.deleteMany({})
+})
 
 describe('creating a new user', () => {
   test('fails with status code 400 if username is less than 3 characters', async () => {

@@ -1,5 +1,3 @@
-const { test, describe } = require('node:test')
-const assert = require('node:assert')
 const listHelper = require('../utils/list_helper')
 
 const blogs = [
@@ -56,27 +54,27 @@ const blogs = [
 describe('dummy', () => {
   test('dummy returns one', () => {
     const result = listHelper.dummy([])
-    assert.strictEqual(result, 1)
+    expect(result).toBe(1)
   })
 })
 
 describe('total likes', () => {
   test('of empty list is zero', () => {
     const result = listHelper.totalLikes([])
-    assert.strictEqual(result, 0)
+    expect(result).toBe(0)
   })
 
   test('when list has only one blog, equals the likes of that', () => {
     // Slicing out just the Dijkstra blog (5 likes)
     const listWithOneBlog = [blogs[1]]
     const result = listHelper.totalLikes(listWithOneBlog)
-    assert.strictEqual(result, 5)
+    expect(result).toBe(5)
   })
 
   test('of a bigger list is calculated right', () => {
     // 7 + 5 + 12 + 10 + 0 + 2 = 36
     const result = listHelper.totalLikes(blogs)
-    assert.strictEqual(result, 36)
+    expect(result).toBe(36)
   })
 })
 
@@ -84,17 +82,17 @@ describe ('favorite blog', () => {
 
   test ('of list with one blog is the blog itself', () => {
     const result = listHelper.favoriteBlog([blogs[1]])  
-    assert.deepStrictEqual(result, blogs[1])
+    expect(result).toEqual(blogs[1])
   })
 
   test ('of a bigger list is the blog with most likes', () => {
     const result = listHelper.favoriteBlog(blogs)
-    assert.deepStrictEqual(result, blogs[2])
+    expect(result).toEqual(blogs[2])
   })
 
   test ('of empty list is null', () => {
     const result = listHelper.favoriteBlog([])
-    assert.strictEqual(result, null)
+    expect(result).toBeNull()
   })
 
 
@@ -105,12 +103,11 @@ describe ('most blogs', () => {
 
   test ('of  a biggest list is calcuated correctly', () => {
     const result = listHelper.mostBlogs(blogs)
-    assert.deepStrictEqual(result, { author: 'Michael', blogs: 1 })
+    expect(result).toEqual({ author: 'Michael', blogs: 1 })
 
   })  
   test ('of empty list is null', () => {
-  
-    assert.strictEqual(listHelper.mostBlogs([]), null)
+    expect(listHelper.mostBlogs([])).toBeNull()
   })
 })
 
@@ -118,9 +115,9 @@ describe ( 'most likes', () => {
 
   test ('of a bigger list is calculated correctly', () => {
     const result = listHelper.mostLikes(blogs)
-    assert.deepStrictEqual(result, { author: 'John', likes: 12 })
+    expect(result).toEqual({ author: 'John', likes: 12 })
   })  
   test ('of empty list is null', () => {
-    assert.strictEqual(listHelper.mostLikes([]), null)
+    expect(listHelper.mostLikes([])).toBeNull()
   })
 })

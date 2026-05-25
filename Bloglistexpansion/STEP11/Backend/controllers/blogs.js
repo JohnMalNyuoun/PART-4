@@ -65,4 +65,32 @@ blogsRouter.delete('/:id', middleware.userExtractor, async (request, response) =
   }
 });
 
+// PUT: Update an existing blog
+blogsRouter.put('/:id', async (request, response, next) => {
+  const { title, author, url, likes } = request.body;
+
+  const blog = {
+    title,
+    author,
+    url,
+    likes
+  };
+
+  try {
+    const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, {
+      new: true,
+      runValidators: true,
+      context: 'query'
+    });
+
+    if (!updatedBlog) {
+      return response.status(404).json({ error: 'blog not found' });
+    }
+
+    response.json(updatedBlog);
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = blogsRouter;
