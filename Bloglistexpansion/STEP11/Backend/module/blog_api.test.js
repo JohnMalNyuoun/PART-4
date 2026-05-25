@@ -5,7 +5,7 @@ const Blog = require('../models/blog')
 const User = require('../models/user')
 const { connectTestDb, closeTestDb } = require('./test_setup')
 
-jest.setTimeout(600000)
+jest.setTimeout(120000)
 
 const initialBlogs = [
   {
